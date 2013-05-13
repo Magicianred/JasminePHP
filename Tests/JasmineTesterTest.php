@@ -32,7 +32,7 @@ class JasmineTesterTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers MeadSteve\JasminePHP\JasmineTester::RegisterJS
-     * @expectedException InvalidArgumentException
+     * @expectedException \InvalidArgumentException
      */
     public function testRegisterJSNonStringJS_ThrowsAnException()
     {
@@ -59,8 +59,8 @@ class JasmineTesterTest extends \PHPUnit_Framework_TestCase
 
        	$this->object->registerJS($SourceFilePath, $SpecFilePath);
 		$ActualHTML = $this->object->getJSIncludeHTML();
-		AssertThat($ActualHTML, containsString($SourceFilePath));
-		AssertThat($ActualHTML, not(containsString($SpecFilePath)));
+        $this->assertContains($SourceFilePath, $ActualHTML);
+        $this->assertNotContains($SpecFilePath, $ActualHTML);
     }
 
     /**
@@ -74,8 +74,8 @@ class JasmineTesterTest extends \PHPUnit_Framework_TestCase
 
        	$this->object->registerJS($SourceFilePath, $SpecFilePath);
 		$ActualHTML = $this->object->getJSSpecIncludeHTML();
-		AssertThat($ActualHTML, containsString($SpecFilePath));
-		AssertThat($ActualHTML, not(containsString($SourceFilePath)));
+		$this->assertContains($SpecFilePath, $ActualHTML);
+        $this->assertNotContains($SourceFilePath, $ActualHTML);
     }
 
     /**
@@ -96,8 +96,8 @@ class JasmineTesterTest extends \PHPUnit_Framework_TestCase
 
         $ActualHTML = $this->object->getJSSpecIncludeHTML();
 
-		AssertThat($ActualHTML, containsString($expectedTranslatedSpec));
-		AssertThat($ActualHTML, not(containsString($SpecFilePath)));
+        $this->assertContains($expectedTranslatedSpec, $ActualHTML);
+        $this->assertNotContains($SpecFilePath, $ActualHTML);
     }
 
     /**
@@ -115,7 +115,7 @@ class JasmineTesterTest extends \PHPUnit_Framework_TestCase
 
 		$ActualHTML = sprintf($this->object);
 
-		AssertThat($ActualHTML, containsString($JSHTML));
-		AssertThat($ActualHTML, containsString($SpecHtml));
+        $this->assertContains($JSHTML, $ActualHTML);
+        $this->assertContains($SpecHtml, $ActualHTML);
     }
 }
