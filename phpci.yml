@@ -8,7 +8,7 @@ test:
     php_mess_detector:
         allow_failures: true
     php_code_sniffer:
-		standard: "PSR2"
-		allow_failures: true
+        standard: "PSR2"
+        allow_failures: true
     php_cpd:
         allow_failures: true
